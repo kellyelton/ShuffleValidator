@@ -27,7 +27,7 @@ namespace ShuffleValidator
                 Console.WriteLine("##Testing shuffle type {0} ##", stype.Name);
 
                 const int runCount = 1000;
-                const int maxDeckSize = 10;
+                const int maxDeckSize = 200;
 
 
                 var ratingList = new List<double>();
@@ -76,7 +76,7 @@ namespace ShuffleValidator
 
         static List<List<int>> RunTest(int cardCount, Type shuffleType, int runCount)
         {
-            runCount = cardCount.Factorial();
+            //runCount = cardCount.Factorial();
             var results = new List<List<int>>();
             var locker = new object();
 
