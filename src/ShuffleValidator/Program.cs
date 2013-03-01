@@ -15,6 +15,7 @@ namespace ShuffleValidator
         {
             var asses = AppDomain.CurrentDomain.GetAssemblies();
             var shuffleTypeList = new List<Type>();
+            var ignoreList = new List<Type>();
             foreach (var ass in asses)
             {
                 shuffleTypeList.AddRange(ass.GetExportedTypes().Where(x => x.GetInterfaces().Any(y => y == typeof (IShuffle))));
@@ -22,7 +23,9 @@ namespace ShuffleValidator
 
             var resultList = new Dictionary<Type,double>();
 
-            foreach (var stype in shuffleTypeList)
+            //ignoreList.Add(typeof(ControlShuffle));
+
+            foreach (var stype in shuffleTypeList.Where(x=>!ignoreList.Contains(x)))
             {
                 Console.WriteLine("##Testing shuffle type {0} ##", stype.Name);
 
@@ -35,10 +38,18 @@ namespace ShuffleValidator
                 for (var cardCount = 2; cardCount < maxDeckSize; cardCount++)
                 {
                     var top = Console.CursorTop;
-                    DrawProgressBar(cardCount, maxDeckSize - 1, Console.BufferWidth - 10, '#', "");
+                    DrawProgressBar(cardCount, maxDeckSize - 1, Console.BufferWidth - 11, '#', "");
                     Console.WriteLine();
-                    var results = RunTest(cardCount, stype,runCount);
-                    ratingList.Add(AnalizeResults(results, cardCount,runCount));
+                    try
+                    {
+                        var results = RunTest(cardCount, stype, runCount);
+                        ratingList.Add(AnalizeResults(results, cardCount, runCount));
+
+                    }
+                    catch (Exception)
+                    {
+                        
+                    } 
                     Console.CursorTop = top;
                 }
 
@@ -85,19 +96,20 @@ namespace ShuffleValidator
                 repeatcount.Add(i);
 
             var curInt = 0;
-
-            repeatcount.AsParallel().ForAll(x =>
+            var shuffle = (IShuffle)Activator.CreateInstance(shuffleType);
+            shuffle.Setup(cardCount,runCount);
+            do
+            {
+                var cards = CreateCardList(cardCount);
+                var result = shuffle.Shuffle(cards);
+                results.Add(result);
+                lock (locker)
                 {
-                    var cards = CreateCardList(cardCount);
-                    var shuffle = (IShuffle)Activator.CreateInstance(shuffleType);
-                    var result = shuffle.Shuffle(cards);
-                    results.Add(result);
-                    lock (locker)
-                    {
-                        DrawProgressBar(curInt, runCount - 1, Console.BufferWidth - 10, '#', "");
-                        curInt++;
-                    }
-                });
+                    DrawProgressBar(curInt, runCount - 1, Console.BufferWidth - 11, '#', "");
+                    curInt++;
+                }
+            }
+            while (curInt < runCount);
 
             return results;
         }

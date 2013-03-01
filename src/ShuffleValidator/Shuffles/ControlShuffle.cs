@@ -6,6 +6,11 @@ namespace ShuffleValidator
 {
     public class ControlShuffle:IShuffle
     {
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            
+        }
+
         public List<int> Shuffle(IEnumerable<int> cards)
         {
             return cards.ToList();

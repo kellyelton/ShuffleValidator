@@ -6,6 +6,11 @@ namespace ShuffleValidator
 {
     public class QuantumShuffleTest : IShuffle
     {
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            
+        }
+
         public List<int> Shuffle(IEnumerable<int> cards)
         {
             var list = cards.ToList();

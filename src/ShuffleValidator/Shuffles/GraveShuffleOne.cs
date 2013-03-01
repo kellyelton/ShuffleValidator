@@ -8,7 +8,12 @@ namespace ShuffleValidator
 {
     public class GraveShuffleOne : IShuffle
     {
-      public List<int> Shuffle(IEnumerable<int> cards)
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            
+        }
+
+        public List<int> Shuffle(IEnumerable<int> cards)
       {
         int[] castedArray = cards.Cast<int>().ToArray();
         int[] arr = ShuffleMethod(castedArray);

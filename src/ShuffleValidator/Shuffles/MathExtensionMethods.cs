@@ -5,12 +5,13 @@
 
     public static class MathExtensionMethods
     {
-        public static int Factorial(this int input)
+        public static ulong Factorial(this int input)
         {
-            int answer = 0;
+            ulong answer = 0;
 
-            var count = 1;
-            while (count <= input)
+            ulong count = 1;
+            
+            while (count <= (ulong)input)
             {
                 if (count == 1)
                 {

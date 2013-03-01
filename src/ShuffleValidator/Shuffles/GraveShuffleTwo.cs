@@ -8,9 +8,15 @@ namespace ShuffleValidator
 {
     public class GraveShuffleTwo : IShuffle
     {
+        public RNGShit Rng;
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            Rng = new RNGShit();
+        }
+
         public List<int> Shuffle(IEnumerable<int> cards)
         {
-            int[] castedArray = cards.Cast<int>().ToArray();
+            int[] castedArray = cards.ToArray();
             int[] arr = ShuffleMethod(castedArray);
             var list = new List<int>(arr);
             return (list);
@@ -18,7 +24,7 @@ namespace ShuffleValidator
 
         public int[] ShuffleMethod(int[] array)
         {
-            var random = new RNGShit();
+            var random = Rng;
             for (int i = array.Length; i > 1; i--)
             {
                 // Pick random element to swap.

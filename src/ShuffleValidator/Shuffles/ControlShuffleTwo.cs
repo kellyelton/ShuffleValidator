@@ -6,21 +6,23 @@
     public class ControlShuffleTwo : IShuffle
     {
         public static List<List<int>> AllPossibilites;
-        public static int currentIndex = 0;
+        public static int CurrentIndex = 0;
+        public int CardCount { get; set; }
+        public int MaxShuffles { get; set; }
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            CardCount = cardCount;
+            MaxShuffles = maxShuffles;
+            AllPossibilites = null;
+            CurrentIndex = 0;
+        }
         public List<int> Shuffle(IEnumerable<int> cards)
         {
-            var allCards = cards.ToList();
-            if (AllPossibilites == null || AllPossibilites.Count != allCards.Count)
-            {
-                AllPossibilites = allCards.Permute().Select(x=>x.ToList()).ToList();
-                currentIndex = 0;
-            }
+            if (CurrentIndex >= CardCount) CurrentIndex = 0;
 
-            if (currentIndex >= allCards.Count) currentIndex = 0;
+            var ret = cards.Permute().Select(x => x.Take(CardCount).ToList()).Skip(CurrentIndex).First();
 
-            var ret = AllPossibilites[currentIndex];
-
-            currentIndex++;
+            CurrentIndex++;
             
             return ret;
         }

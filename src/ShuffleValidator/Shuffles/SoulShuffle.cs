@@ -8,6 +8,11 @@ namespace ShuffleValidator
 {
     public class SoulShuffle: IShuffle
     {
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            
+        }
+
         public List<int> Shuffle(IEnumerable<int> cards)
         {
             int[] castedArray = cards.Cast<int>().ToArray();

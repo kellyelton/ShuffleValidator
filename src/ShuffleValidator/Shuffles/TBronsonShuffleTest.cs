@@ -75,6 +75,11 @@ namespace ShuffleValidator
             return true;
         }
 
+        public void Setup(int cardCount, int maxShuffles)
+        {
+            
+        }
+
         public List<int> Shuffle(IEnumerable<int> cards)
         {
             var cardList = cards.ToList();
