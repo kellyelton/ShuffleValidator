@@ -1,0 +1,4 @@
+ShuffleValidator
+================
+
+Scores shuffling algorithms
