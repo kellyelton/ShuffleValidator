@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RNGCryptoServiceProviderExtensionMethods.cs" />
     <Compile Include="Shuffles\ControlShuffle.cs" />
     <Compile Include="Shuffles\ControlShuffleTwo.cs" />
+    <Compile Include="Shuffles\FatShuffle.cs" />
     <Compile Include="Shuffles\GraveShuffleOne.cs" />
     <Compile Include="Shuffles\GraveShuffleTwo.cs" />
     <Compile Include="IShuffle.cs" />

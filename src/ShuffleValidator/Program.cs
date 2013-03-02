@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 
@@ -24,13 +25,14 @@ namespace ShuffleValidator
             var resultList = new Dictionary<Type,double>();
 
             //ignoreList.Add(typeof(ControlShuffle));
+            //ignoreList.Add(typeof(ControlShuffleTwo));
 
             foreach (var stype in shuffleTypeList.Where(x=>!ignoreList.Contains(x)))
             {
                 Console.WriteLine("##Testing shuffle type {0} ##", stype.Name);
 
                 const int runCount = 1000;
-                const int maxDeckSize = 200;
+                const int maxDeckSize = 20;
 
 
                 var ratingList = new List<double>();
@@ -38,7 +40,7 @@ namespace ShuffleValidator
                 for (var cardCount = 2; cardCount < maxDeckSize; cardCount++)
                 {
                     var top = Console.CursorTop;
-                    DrawProgressBar(cardCount, maxDeckSize - 1, Console.BufferWidth - 11, '#', "");
+                    DrawProgressBar(cardCount, maxDeckSize - 1, '#', "");
                     Console.WriteLine();
                     try
                     {
@@ -105,7 +107,7 @@ namespace ShuffleValidator
                 results.Add(result);
                 lock (locker)
                 {
-                    DrawProgressBar(curInt, runCount - 1, Console.BufferWidth - 11, '#', "");
+                    DrawProgressBar(curInt, runCount - 1, '#', "");
                     curInt++;
                 }
             }
@@ -124,8 +126,9 @@ namespace ShuffleValidator
             return cards;
         }
 
-        private static void DrawProgressBar(int complete, int maxVal, int barSize, char progressCharacter, string message)
+        private static void DrawProgressBar(int complete, int maxVal, char progressCharacter, string message)
         {
+            int barSize = Console.BufferWidth - 14;
             Console.CursorVisible = false;
             int top = Console.CursorTop;
             Console.WriteLine(message);

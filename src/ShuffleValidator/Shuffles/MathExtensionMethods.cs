@@ -1,31 +1,26 @@
-﻿namespace ShuffleValidator.Shuffles
+﻿using System;
+using System.Numerics;
+
+namespace ShuffleValidator.Shuffles
 {
     using System.Collections.Generic;
     using System.Linq;
 
     public static class MathExtensionMethods
     {
-        public static ulong Factorial(this int input)
+        public static BigInteger Factorial(this int input)
         {
-            ulong answer = 0;
-
-            ulong count = 1;
-            
-            while (count <= (ulong)input)
+            int setSize = input; 
+            int sampleSize = input;
+            var result = new BigInteger(setSize); 
+            for (int i = setSize; i > 0; --i)
             {
-                if (count == 1)
-                {
-                    answer = 1;
-                    count++;
-                }
-                else
-                {
-                    answer = count * answer;
-                    count++;
-                }
+                var cur = result * i;
+                if(cur == 0)throw new OverflowException("Blah");
+                result = result * i;
             }
-
-            return answer;
+            result = result * ((setSize - sampleSize) + 1);
+            return result;
         }
         public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> sequence)
         {
