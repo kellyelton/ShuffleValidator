@@ -1,24 +1,39 @@
 ﻿using System;
 using System.Numerics;
 
-namespace ShuffleValidator.Shuffles
+namespace ShuffleValidator
 {
     using System.Collections.Generic;
     using System.Linq;
 
     public static class MathExtensionMethods
     {
+        public static int NextPowerOfTwo(this int input)
+        {
+            return 2.Powers().First(x => x > input);
+        }
+
+        public static IEnumerable<int> Powers(this int baseNumber)
+        {
+            var result = 1;
+            do
+            {
+                result = result * baseNumber;
+                if(result > int.MaxValue)
+                    yield break;
+                yield return result;
+            }
+            while (result < int.MaxValue);
+        }
+
         public static BigInteger Factorial(this int input)
         {
-            int setSize = input; 
-            int sampleSize = input;
-            var result = new BigInteger(setSize); 
-            for (int i = setSize; i > 0; --i)
+            var res = new BigInteger(1);
+            for (var i = 1; i <= input; i++)
             {
-                result = result * i;
+                res *= i;
             }
-            result = result * ((setSize - sampleSize) + 1);
-            return result;
+            return res;
         }
         public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> sequence)
         {

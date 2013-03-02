@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Numerics;
-using System.Reflection;
-using System.Text;
 
 namespace ShuffleValidator
 {
-    using global::ShuffleValidator.Shuffles;
-
     class Program
     {
         static void Main(string[] args)
@@ -32,7 +26,7 @@ namespace ShuffleValidator
                 Console.WriteLine("##Testing shuffle type {0} ##", stype.Name);
 
                 const int runCount = 1000;
-                const int maxDeckSize = 20;
+                const int maxDeckSize = 200;
 
 
                 var ratingList = new List<double>();
@@ -42,16 +36,8 @@ namespace ShuffleValidator
                     var top = Console.CursorTop;
                     DrawProgressBar(cardCount, maxDeckSize - 1, '#', "");
                     Console.WriteLine();
-                    try
-                    {
-                        var results = RunTest(cardCount, stype, runCount);
-                        ratingList.Add(AnalizeResults(results, cardCount, runCount));
-
-                    }
-                    catch (Exception)
-                    {
-                        
-                    } 
+                    var results = RunTest(cardCount, stype, runCount);
+                    ratingList.Add(AnalizeResults(results, cardCount, runCount));
                     Console.CursorTop = top;
                 }
 
@@ -105,11 +91,8 @@ namespace ShuffleValidator
                 var cards = CreateCardList(cardCount);
                 var result = shuffle.Shuffle(cards);
                 results.Add(result);
-                lock (locker)
-                {
-                    DrawProgressBar(curInt, runCount - 1, '#', "");
-                    curInt++;
-                }
+                DrawProgressBar(curInt, runCount - 1, '#', "");
+                curInt++;
             }
             while (curInt < runCount);
 

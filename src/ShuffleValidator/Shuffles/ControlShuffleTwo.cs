@@ -20,7 +20,7 @@
         {
             if (CurrentIndex >= CardCount) CurrentIndex = 0;
 
-            var ret = cards.Permute().Select(x => x.Take(CardCount).ToList()).Skip(CurrentIndex).First();
+            var ret = cards.Permute().Select(x => x.ToList()).Skip(CurrentIndex).First();
 
             CurrentIndex++;
             

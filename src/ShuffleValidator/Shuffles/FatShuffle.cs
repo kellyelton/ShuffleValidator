@@ -9,7 +9,6 @@ namespace ShuffleValidator.Shuffles
     public class FatShuffle : IShuffle
     {
         public static RNGCryptoServiceProvider Random = new RNGCryptoServiceProvider();
-        public static Byte[] RandomBuffer = new byte[8];
         public int CardCount { get; set; }
         public int MaxShuffles { get; set; }
         public BigInteger MaxCombinations { get; set; }
@@ -23,23 +22,24 @@ namespace ShuffleValidator.Shuffles
 
         public List<int> Shuffle(IEnumerable<int> cards)
         {
-            var num = Random.Next(0,CardCount);
+            cards = cards.ToList();
+            var num = Random.Next(0, MaxCombinations);
             var e = cards.Permute();
-            var curSkip = 1;
-            for (BigInteger i = 0; i < num; i++)
+
+            BigInteger curInt = 0;
+
+            if (num > 0)
             {
-                if (curSkip == int.MaxValue)
-                {
-                    e = e.Skip(curSkip);
-                    curSkip = 1;
-                }
-                else if (i == num - 1)
-                {
-                    e = e.Skip(curSkip);
-                }
-                curSkip++;
+                e = e.SkipWhile((x, y) =>
+                    {
+                        curInt++;
+                        return curInt == num;
+                    });
+
             }
-            return e.Take(1).First().ToList();
+            var ret = e.Take(1).First().ToList();
+
+            return ret;
         }
     }
 }
