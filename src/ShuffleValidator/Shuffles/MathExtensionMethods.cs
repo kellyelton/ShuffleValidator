@@ -15,8 +15,6 @@ namespace ShuffleValidator.Shuffles
             var result = new BigInteger(setSize); 
             for (int i = setSize; i > 0; --i)
             {
-                var cur = result * i;
-                if(cur == 0)throw new OverflowException("Blah");
                 result = result * i;
             }
             result = result * ((setSize - sampleSize) + 1);
