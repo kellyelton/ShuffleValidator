@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace ShuffleValidator
 {
+    using global::ShuffleValidator.Shuffles;
+
     class Program
     {
         static void Main(string[] args)
@@ -18,8 +20,10 @@ namespace ShuffleValidator
 
             var resultList = new Dictionary<Type,double>();
 
-            //ignoreList.Add(typeof(ControlShuffle));
-            //ignoreList.Add(typeof(ControlShuffleTwo));
+            ignoreList.Add(typeof(ControlShuffle));
+            ignoreList.Add(typeof(ControlShuffleTwo));
+            ignoreList.Add(typeof(FatShuffle));
+
 
             foreach (var stype in shuffleTypeList.Where(x=>!ignoreList.Contains(x)))
             {
