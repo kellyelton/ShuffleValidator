@@ -33,7 +33,7 @@ namespace ShuffleValidator.Shuffles
                 e = e.SkipWhile((x, y) =>
                     {
                         curInt++;
-                        return curInt == num;
+                        return curInt != num;
                     });
 
             }
