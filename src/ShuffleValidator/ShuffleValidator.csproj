@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RNGCryptoServiceProviderExtensionMethods.cs" />
-    <Compile Include="RNGRandom.cs" />
     <Compile Include="Shuffles\ControlShuffle.cs" />
     <Compile Include="Shuffles\ControlShuffleTwo.cs" />
+    <Compile Include="Shuffles\CryptoRandomShuffle.cs" />
     <Compile Include="Shuffles\FatShuffle.cs" />
     <Compile Include="Shuffles\GraveShuffleOne.cs" />
     <Compile Include="Shuffles\GraveShuffleTwo.cs" />
