@@ -25,7 +25,7 @@ namespace ShuffleValidator
         public int[] CryptoShuffle(int[] array)
         {
             var random = cryptoRng;
-            for (int i = array.Length - 1; i > 1; i--)
+            for (int i = array.Length - 1; i >= 0; i--)
             {
                 // Pick random element to swap.
                 int j = random.Next(i + 1); // 0 <= j <= i
