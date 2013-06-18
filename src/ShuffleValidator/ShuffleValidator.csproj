@@ -55,6 +55,7 @@
     <Compile Include="MathExtensionMethods.cs" />
     <Compile Include="QuantumList.cs" />
     <Compile Include="QuantumState.cs" />
+    <Compile Include="Shuffles\klkitchensShufflizer.cs" />
     <Compile Include="Shuffles\QuantumShuffleTest.cs" />
     <Compile Include="Shuffles\SoulShuffle.cs" />
     <Compile Include="Shuffles\TBronsonShuffleTest.cs" />
