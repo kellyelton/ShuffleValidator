@@ -23,6 +23,11 @@ namespace ShuffleValidator
             ignoreList.Add(typeof(ControlShuffle));
             ignoreList.Add(typeof(ControlShuffleTwo));
             ignoreList.Add(typeof(FatShuffle));
+			//ignoreList.Add(typeof(CryptoRandomShuffle));
+			//ignoreList.Add(typeof(QuantumShuffleTest));
+			//ignoreList.Add(typeof(GraveShuffleOne));
+			//ignoreList.Add(typeof(GraveShuffleTwo));
+			//ignoreList.Add(typeof(TBronsonShuffleTest));
 
 
             foreach (var stype in shuffleTypeList.Where(x=>!ignoreList.Contains(x)))
